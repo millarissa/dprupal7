@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * Implements hook_schema().
+ */
+
+function event_schema() {
+  $schema = array();
+
+  $schema['event'] = array(
+    'description' => 'Event entity.',
+    'fields' => array(
+      'id' => array(
+        'description' => 'id',
+         'type' => 'serial',
+         'not null' => TRUE,
+      ),
+      'name' => array(
+        'description' => 'user name.',
+        'type' => 'varchar',
+        'length' => 32,
+      ),
+      'last_name' => array(
+        'description' => 'user last_name.',
+        'type' => 'varchar',
+        'length' => 32,
+      ),
+      'tickets' => array(
+        'description' => 'user tickets',
+        'type' => 'int',
+        'not null' => TRUE,
+        'default' => 10,
+      ),
+    ),
+    'primary key' => array('id'),
+  );
+
+  return $schema;
+}
+
+
+/*
+ * Implements hook_uninstall()
+ */
+function event_uninstall(){
+	drupal_uninstall_schema('event');
+}
+
