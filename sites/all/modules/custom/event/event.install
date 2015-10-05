@@ -38,11 +38,3 @@ function event_schema() {
   return $schema;
 }
 
-
-/*
- * Implements hook_uninstall()
- */
-function event_uninstall(){
-	drupal_uninstall_schema('event');
-}
-

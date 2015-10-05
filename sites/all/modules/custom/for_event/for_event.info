@@ -1,0 +1,6 @@
+name = "From event"
+description = "Custome from  event"
+package = Pro Drupal Development
+dependencies[] = event
+version = VERSION
+core = 7.x

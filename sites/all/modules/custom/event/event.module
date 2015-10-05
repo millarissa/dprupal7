@@ -8,6 +8,7 @@ function event_menu() {
     'access arguments' => array('access content'),
     'description' => 'My form',
     'type' => MENU_CALLBACK,
+    'file' => 'event.inc',
   );
 
   $items['event/result'] = array(
@@ -16,77 +17,9 @@ function event_menu() {
     'access arguments' => array('access content'),
     'description' => 'My form',
     'type' => MENU_CALLBACK,
+    'file' => 'event.inc',
   );
   return $items;
 }
 
-function event_form($form, &$form_state) {
-
-  $form['name']['first'] = array(
-    '#type' => 'textfield',
-    '#title' => t('First name'),
-    '#default_value' => "First name",
-    '#description' => "Please enter your first name.",
-    '#size' => 20,
-    '#maxlength' => 20,
-  );
-  $form['name']['last'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Last name'),
-    '#default_value' => "Last name",
-    '#description' => "Please enter your last name.",
-    '#size' => 20,
-    '#maxlength' => 20,
-  );
-
-  $form['tickets'] = array(
-    '#type' => 'textfield',
-    '#title' => "tickets",
-    '#default_value' => "10",
-    '#description' => 'Please enter number of tickets',
-    '#size' => 20,
-  );
-
-  $form['submit'] = array(
-    '#type' => 'submit',
-    '#value' => 'Submit',
-  );
-
-  return $form;
-}
-
-function event_callback() {
-  $form = drupal_get_form('event_form');
-  $form = drupal_render($form);
-  return $form;
-}
-
-function event_form_submit(&$form, &$form_state) {
-
-  $name = $form_state['values']["first"];
-  $last_name = $form_state['values']["last"];
-  $tickets = $form_state['values']["tickets"];
-  insert_event($name, $last_name, $tickets);
-
-  $form_state['redirect'] = "event/result";
-
-}
-
-function insert_event($name, $last_name, $tickets) {
-  db_insert('event')
-    ->fields(array(
-      'name' => $name,
-      'last_name' => $last_name,
-      'tickets' => $tickets,
-    ))->execute();
-}
-
-function event_result_callback() {
-  $output = array(
-    '#type' => "markup",
-    '#markup' => t("Tickets issued"),
-  );
-
-  return $output;
-}
 
