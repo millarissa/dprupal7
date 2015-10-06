@@ -3,25 +3,15 @@
 /**
  * Implements custom_hook_message()
  */
+function hook_message() {
 
-function for_event_custom_hook_message() {
-  return $output = array(
-    '#type' => "markup",
-    '#markup' => t("Tickets issued!!!"),
-  );
 }
 
 /**
- * Implements custom_hook_insert_event()
+ * Interface custom_hook_insert_event()
  */
+function hook_insert($name, $last_name, $tickets) {
 
-function for_event_custom_hook_insert_event($name, $last_name, $tickets) {
-  db_insert('event')
-    ->fields(array(
-      'name' => $name,
-      'last_name' => $last_name,
-      'tickets' => $tickets,
-    ))->execute();
 }
 
 
